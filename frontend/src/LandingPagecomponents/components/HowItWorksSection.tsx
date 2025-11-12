@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { UserPlus, Search, CreditCard, Video, TrendingUp } from "lucide-react";
@@ -41,9 +42,13 @@ const steps = [
 ];
 
 const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ darkMode = false }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
     <section 
       id="how-it-works" 
+      ref={ref}
       className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 ${
         darkMode 
           ? 'bg-black' 
@@ -52,7 +57,12 @@ const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ darkMode = false 
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <motion.div 
+          className="text-center mb-12 sm:mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-4 ${
             darkMode ? 'text-white' : 'text-gray-800'
           }`}>
@@ -69,16 +79,19 @@ const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ darkMode = false 
           <div className={`w-24 h-1 rounded-full mx-auto mt-6 ${
             darkMode ? 'bg-accent-blue' : 'bg-[#1A1A1A]'
           }`} />
-        </div>
+        </motion.div>
 
         {/* Timeline */}
         <div className="relative">
           {/* Steps */}
           <div className="space-y-8 sm:space-y-12 lg:space-y-16">
             {steps.map((step, index) => (
-              <div 
+              <motion.div 
                 key={index}
                 className="flex flex-col lg:flex-row items-center gap-6 sm:gap-8 lg:gap-12"
+                initial={{ opacity: 0, y: 50 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
               >
                 {/* Content */}
                 <div className="flex-1 text-center lg:text-left w-full">
@@ -125,13 +138,18 @@ const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ darkMode = false 
 
                 {/* Spacer for alternating layout */}
                 <div className="flex-1 hidden lg:block"></div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-12 sm:mt-16">
+        <motion.div 
+          className="text-center mt-12 sm:mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+        >
           <div className={`rounded-2xl p-6 sm:p-8 shadow-lg max-w-2xl mx-auto border ${
             darkMode 
               ? 'bg-black border-gray-700' 
@@ -158,7 +176,7 @@ const HowItWorksSection: React.FC<HowItWorksSectionProps> = ({ darkMode = false 
               </button>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

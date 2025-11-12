@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar } from "lucide-react";
@@ -10,19 +11,27 @@ interface HeroSectionProps {
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoClick }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
     <section 
+      ref={ref}
       className={`relative min-h-screen flex items-center justify-center transition-colors duration-300 ${
         darkMode 
           ? 'bg-black' 
           : 'bg-[#F9F9F9]'
       }`}
     >
-
       <div className="container mx-auto px-4 grid lg:grid-cols-2 gap-12 items-center">
         {/* Left Content */}
         <div className="text-center lg:text-left space-y-8">
-          <div className="space-y-4">
+          <motion.div 
+            className="space-y-4"
+            initial={{ opacity: 0, y: 50 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
             <h1 className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight ${
               darkMode ? 'text-white' : 'text-[#1A1A1A]'
             }`}>
@@ -40,10 +49,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               Therabee helps families find verified therapists, book secure sessions, 
               and track progress — all in one place.
             </p>
-          </div>
+          </motion.div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
             <Link to="/login">
               <Button 
                 size="lg" 
@@ -69,10 +83,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
               Book Demo Session
             </Button>
-          </div>
+          </motion.div>
 
           {/* Partner Logos */}
-          <div className="pt-8">
+          <motion.div 
+            className="pt-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
             <p className={`text-sm mb-4 ${
               darkMode ? 'text-gray-300' : 'text-[#4D4D4D]'
             }`}>Trusted by leading healthcare providers</p>
@@ -98,11 +117,16 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
                   : 'text-[#1A1A1A] bg-accent-blue/20'
               }`}>+500 more</div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right Image */}
-        <div className="relative">
+        <motion.div 
+          className="relative"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+        >
           <div className="relative rounded-2xl overflow-hidden shadow-lg">
             <img
               src={heroImage}
@@ -111,7 +135,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               loading="lazy"
             />
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

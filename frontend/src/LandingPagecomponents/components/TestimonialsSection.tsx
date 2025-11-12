@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Card, CardContent } from "./ui/card";
 import { Star, Quote } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -46,6 +47,8 @@ const testimonials = [
 ];
 
 const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = false }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -64,6 +67,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
   return (
     <section 
       id="testimonials" 
+      ref={ref}
       className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 ${
         darkMode 
           ? 'bg-black' 
@@ -72,7 +76,12 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <motion.div 
+          className="text-center mb-12 sm:mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-4 ${
             darkMode ? 'text-white' : 'text-gray-800'
           }`}>
@@ -89,10 +98,15 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
           <div className={`w-24 h-1 rounded-full mx-auto mt-6 ${
             darkMode ? 'bg-accent-blue' : 'bg-[#1A1A1A]'
           }`} />
-        </div>
+        </motion.div>
 
         {/* Testimonials Carousel */}
-        <div className="max-w-4xl mx-auto">
+        <motion.div 
+          className="max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        >
           <div className="relative overflow-hidden rounded-2xl">
             <div 
               className="flex transition-transform duration-500 ease-in-out"
@@ -158,7 +172,12 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
           </div>
 
           {/* Carousel Indicators */}
-          <div className="flex justify-center mt-6 sm:mt-8 space-x-2">
+          <motion.div 
+            className="flex justify-center mt-6 sm:mt-8 space-x-2"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          >
             {testimonials.map((_, index) => (
               <button
                 key={index}
@@ -174,19 +193,27 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
                 onClick={() => setCurrentIndex(index)}
               />
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16">
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mt-12 sm:mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+        >
           {[
             { value: "500+", label: "Verified Therapists" },
             { value: "10k+", label: "Successful Sessions" },
             { value: "98%", label: "Family Satisfaction" }
           ].map((stat, index) => (
-            <div 
+            <motion.div 
               key={stat.label}
               className="text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.5, delay: 0.8 + index * 0.1, ease: "easeOut" }}
             >
               <div className={`text-3xl sm:text-4xl lg:text-5xl font-bold mb-2 ${
                 darkMode ? 'text-accent-blue' : 'text-[#1A1A1A]'
@@ -198,9 +225,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
               }`}>
                 {stat.label}
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

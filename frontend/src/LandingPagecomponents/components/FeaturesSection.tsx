@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Shield, Video, Calendar, CreditCard, Bell, BarChart3, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -41,19 +42,27 @@ const features = [
 ];
 
 const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
     <section 
       id="features" 
+      ref={ref}
       className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 ${
         darkMode 
           ? 'bg-black' 
           : 'bg-[#F9F9F9]'
       }`}
     >
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <motion.div 
+          className="text-center mb-12 sm:mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ${
             darkMode ? 'text-white' : 'text-gray-800'
           }`}>
@@ -71,16 +80,22 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
           <div className={`w-24 h-1 rounded-full mx-auto mt-6 ${
             darkMode ? 'bg-accent-blue' : 'bg-[#1A1A1A]'
           }`} />
-        </div>
+        </motion.div>
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((feature, index) => (
-            <Card key={index} className={`group hover:shadow-lg transition-shadow duration-300 h-full border ${
-              darkMode 
-                ? 'border-gray-700 bg-black' 
-                : 'border-[#E6E6E6] bg-white'
-            }`}>
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
+            >
+              <Card className={`group hover:shadow-lg transition-shadow duration-300 h-full border ${
+                darkMode 
+                  ? 'border-gray-700 bg-black' 
+                  : 'border-[#E6E6E6] bg-white'
+              }`}>
               <CardHeader className="text-center pb-4">
                 <div className={`w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center ${
                   darkMode ? 'bg-accent-blue/30' : 'bg-accent-blue/40'
@@ -101,13 +116,19 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
                 }`}>
                   {feature.description}
                 </p>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
         {/* Bottom CTA */}
-        <div className="text-center mt-12 sm:mt-16">
+        <motion.div 
+          className="text-center mt-12 sm:mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+        >
           <p className={`text-base sm:text-lg mb-6 px-4 ${
             darkMode ? 'text-gray-300' : 'text-gray-600'
           }`}>
@@ -125,7 +146,7 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
               </button>
             </Link>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
@@ -69,19 +70,27 @@ const plans = [
 ];
 
 const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
     <section 
       id="pricing" 
+      ref={ref}
       className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 ${
         darkMode 
           ? 'bg-black' 
           : 'bg-[#F9F9F9]'
       }`}
     >
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <motion.div 
+          className="text-center mb-12 sm:mb-16"
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
           <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-4 ${
             darkMode ? 'text-white' : 'text-gray-800'
           }`}>
@@ -98,23 +107,28 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
           <div className={`w-24 h-1 rounded-full mx-auto mt-6 ${
             darkMode ? 'bg-accent-blue' : 'bg-[#1A1A1A]'
           }`} />
-        </div>
+        </motion.div>
 
         {/* Pricing Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => (
-            <Card 
+            <motion.div
               key={index}
-              className={`relative border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full ${
-                plan.isPopular 
-                  ? `ring-2 ${darkMode ? 'ring-accent-blue' : 'ring-accent-blue'}` 
-                  : ''
-              } ${
-                darkMode 
-                  ? 'bg-black border-gray-700' 
-                  : 'bg-white border-[#E6E6E6]'
-              }`}
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+              transition={{ duration: 0.6, delay: index * 0.15, ease: "easeOut" }}
             >
+              <Card 
+                className={`relative border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 h-full ${
+                  plan.isPopular 
+                    ? `ring-2 ${darkMode ? 'ring-accent-blue' : 'ring-accent-blue'}` 
+                    : ''
+                } ${
+                  darkMode 
+                    ? 'bg-black border-gray-700' 
+                    : 'bg-white border-[#E6E6E6]'
+                }`}
+              >
               {/* Popular Badge */}
               {plan.isPopular && (
                 <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
@@ -212,12 +226,18 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
                   </Button>
                 </Link>
               </CardContent>
-            </Card>
+              </Card>
+            </motion.div>
           ))}
         </div>
 
         {/* Payment Icons */}
-        <div className="text-center mt-12 sm:mt-16">
+        <motion.div 
+          className="text-center mt-12 sm:mt-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.6, ease: "easeOut" }}
+        >
           <p className={`text-sm sm:text-base mb-4 sm:mb-6 px-4 ${
             darkMode ? 'text-gray-400' : 'text-gray-600'
           }`}>
@@ -243,10 +263,15 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
               </span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Money Back Guarantee */}
-        <div className="text-center mt-8 sm:mt-12 px-4">
+        <motion.div 
+          className="text-center mt-8 sm:mt-12 px-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+        >
           <div className={`rounded-2xl p-4 sm:p-6 max-w-md mx-auto shadow-xl border ${
             darkMode 
               ? 'bg-black border-gray-700' 
@@ -268,7 +293,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
               Not satisfied? Get a full refund within 30 days, no questions asked.
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

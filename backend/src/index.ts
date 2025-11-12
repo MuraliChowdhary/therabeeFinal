@@ -125,6 +125,8 @@
 // };
 
 // startServer();
+
+
 import express from 'express';
 import cors, { CorsOptions } from "cors";
 import dotenv from 'dotenv';
@@ -143,34 +145,63 @@ import prisma from './utils/prisma.js';
 // Load environment variables
 dotenv.config();
 const app = express();
-const PORT = process.env.PORT || 3000;
-const allowedOrigins: string[] = [
-  "https://theraabee.vercel.app",
-  "http://localhost:3000",
+const PORT = process.env.PORT || 5000;
+
+// Define allowed origins
+const allowedOrigins = [
+  'https://theraabee.vercel.app',
+  'http://localhost:3000',
+  'http://localhost:5173', // Vite dev server
+  'https://theraabee.vercel.app',
 ];
-// Global Middleware
+
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    console.log('[CORS] Request origin:', origin ?? 'none');
+    
+    // Allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS"));
+      console.log('[CORS] Blocked origin:', origin);
+      callback(new Error('Not allowed by CORS'));
     }
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'X-Requested-With',
+    'Accept',
+    'Origin',
+    'Access-Control-Request-Method',
+    'Access-Control-Request-Headers',
+    'X-API-Key'
+  ],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  preflightContinue: false,
+  optionsSuccessStatus: 204,
+  maxAge: 86400, // 24 hours
 };
 
+// Apply CORS FIRST - before any other middleware
 app.use(cors(corsOptions));
+
+// Handle preflight requests globally
+app.options('*', cors(corsOptions));
+
+// Parse JSON bodies
 app.use(express.json());
 
-// Basic request logger (path, method, status)
+// Basic request logger (path, method, status) - AFTER CORS
 app.use((req, res, next) => {
   const started = Date.now();
-  // eslint-disable-next-line no-console
-  console.log('[REQ]', req.method, req.originalUrl);
+  console.log('[REQ]', req.method, req.originalUrl, 'Origin:', req.headers.origin || 'none');
   res.on('finish', () => {
     const ms = Date.now() - started;
-    // eslint-disable-next-line no-console
     console.log('[RES]', req.method, req.originalUrl, res.statusCode, ms + 'ms');
   });
   next();
@@ -188,9 +219,30 @@ app.use('/api/v1/demo', demoRoutes);
 
 // Health endpoint for connectivity checks
 app.get('/api/v1/health', (_req, res) => {
-  res.status(200).json({ status: 'ok' });
+  res.status(200).json({ 
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || 'development'
+  });
 });
 
+// Root endpoint
+app.get('/', (_req, res) => {
+  res.status(200).json({ 
+    message: 'TheraBee API Server',
+    version: '1.0.0',
+    status: 'running'
+  });
+});
+
+// 404 handler for undefined routes
+app.use('*', (req, res) => {
+  res.status(404).json({
+    error: 'Route not found',
+    path: req.originalUrl,
+    method: req.method
+  });
+});
 
 const startServer = async () => {
   try {
@@ -213,6 +265,7 @@ const startServer = async () => {
     
     app.listen(PORT, () => {
       console.log(`✓ Server is running on http://localhost:${PORT}`);
+      console.log(`✓ CORS enabled for origins: ${allowedOrigins.join(', ')}`);
     });
   } catch (error) {
     console.error('✗ Failed to start server:', error);

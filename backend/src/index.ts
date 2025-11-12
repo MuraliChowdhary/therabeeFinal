@@ -17,37 +17,10 @@ import prisma from './utils/prisma.js';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const allowedOrigins: string[] = [
-  "https://thera-connectnew.vercel.app",
-  "http://localhost:3000",
-  "https://therabee.in",
-  "https://www.therabee.in",
-  "https://theraabee.vercel.app",
-  "https://therabeefinal.onrender.com",
-];
-
-// CORS must be FIRST middleware - before any other middleware
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps, Postman, or same-origin requests)
-    if (!origin) {
-      return callback(null, true);
-    }
-
-    // Check if origin is in allowed list
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    // Check for Vercel preview deployments (they have dynamic URLs)
-    if (origin.includes('.vercel.app')) {
-      return callback(null, true);
-    }
-
-    // Log blocked origin for debugging
-    console.error('[CORS] Blocked origin:', origin);
-    console.error('[CORS] Allowed origins:', allowedOrigins);
-    callback(new Error(`Not allowed by CORS. Origin: ${origin}`));
+    console.log('[CORS] Request origin:', origin ?? 'none');
+    callback(null, true); // Reflect the request origin (dynamic allow list)
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
@@ -68,21 +41,27 @@ const corsOptions: CorsOptions = {
 // Apply CORS FIRST - before any other middleware
 app.use(cors(corsOptions));
 
-// Handle preflight OPTIONS requests explicitly for all routes
-app.options('*', (req, res) => {
+// Manually set CORS headers for every response (fallback for proxies/CDN)
+app.use((req, res, next) => {
   const origin = req.headers.origin;
-  
-  // Check if origin is allowed
-  if (!origin || allowedOrigins.includes(origin) || origin.includes('.vercel.app')) {
-    res.header('Access-Control-Allow-Origin', origin || '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Requested-With, Accept, Origin, Access-Control-Request-Method, Access-Control-Request-Headers');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    res.header('Access-Control-Max-Age', '86400'); // 24 hours
+  if (origin) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, PATCH, DELETE, OPTIONS, HEAD'
+  );
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization, X-Requested-With, Accept, Origin, Access-Control-Request-Method, Access-Control-Request-Headers'
+  );
+
+  if (req.method === 'OPTIONS') {
     return res.sendStatus(204);
   }
-  
-  res.sendStatus(403);
+
+  next();
 });
 
 // Parse JSON bodies

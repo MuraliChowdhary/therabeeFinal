@@ -23,17 +23,39 @@ const allowedOrigins: string[] = [
   "https://therabee.in",
   "https://www.therabee.in",
   "https://theraabee.vercel.app",
+  "https://therabeefinal.onrender.com",
 ];
+
 // Global Middleware
 const corsOptions: CorsOptions = {
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
+    // Allow requests with no origin (like mobile apps, Postman, or same-origin requests)
+    if (!origin) {
+      console.log('[CORS] Request with no origin - allowing');
+      return callback(null, true);
     }
+
+    // Check if origin is in allowed list
+    if (allowedOrigins.includes(origin)) {
+      console.log('[CORS] Allowed origin:', origin);
+      return callback(null, true);
+    }
+
+    // Check for Vercel preview deployments (they have dynamic URLs)
+    if (origin.includes('.vercel.app')) {
+      console.log('[CORS] Vercel deployment detected - allowing:', origin);
+      return callback(null, true);
+    }
+
+    // Log blocked origin for debugging
+    console.error('[CORS] Blocked origin:', origin);
+    console.error('[CORS] Allowed origins:', allowedOrigins);
+    callback(new Error(`Not allowed by CORS. Origin: ${origin}`));
   },
   credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  exposedHeaders: ['Content-Range', 'X-Content-Range'],
 };
 
 app.use(cors(corsOptions));

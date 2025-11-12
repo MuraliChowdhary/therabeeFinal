@@ -29,8 +29,8 @@ const CTASection: React.FC<CTASectionProps> = ({ darkMode = false }) => {
       {/* Enhanced Animated Background */}
       <div className={`absolute inset-0 transition-colors duration-300 ${
         darkMode 
-          ? 'bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900' 
-          : 'bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600'
+          ? 'bg-black' 
+          : 'bg-[#1A1A1A]'
       }`}>
         {/* Top Transition Wave */}
         <div className="absolute top-0 left-0 w-full overflow-hidden">
@@ -189,7 +189,9 @@ const CTASection: React.FC<CTASectionProps> = ({ darkMode = false }) => {
         >
           {/* Enhanced Sparkle Icon */}
           <motion.div 
-            className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full mb-6 sm:mb-8 shadow-2xl relative overflow-hidden"
+            className={`inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full mb-6 sm:mb-8 shadow-2xl relative overflow-hidden ${
+              darkMode ? 'bg-white' : 'bg-white'
+            }`}
             animate={{
               rotate: [0, 360],
               scale: [1, 1.1, 1]
@@ -200,19 +202,9 @@ const CTASection: React.FC<CTASectionProps> = ({ darkMode = false }) => {
             }}
             whileHover={{ scale: 1.2 }}
           >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-orange-400 rounded-full"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.7, 1, 0.7]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-            <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-white relative z-10" />
+            <Sparkles className={`w-8 h-8 sm:w-10 sm:h-10 relative z-10 ${
+              darkMode ? 'text-black' : 'text-black'
+            }`} />
           </motion.div>
 
           {/* Enhanced Headline */}
@@ -224,18 +216,7 @@ const CTASection: React.FC<CTASectionProps> = ({ darkMode = false }) => {
           >
             Ready to experience the{" "}
             <motion.span 
-              className="text-gradient bg-gradient-to-r from-yellow-300 via-orange-400 to-red-400 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                backgroundSize: "200% 200%"
-              }}
+              className="text-white"
             >
               future of therapy
             </motion.span>
@@ -268,7 +249,11 @@ const CTASection: React.FC<CTASectionProps> = ({ darkMode = false }) => {
               <Link to="/login">
                 <Button 
                   size="lg" 
-                  className="text-base sm:text-xl px-8 sm:px-10 py-4 sm:py-6 bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-semibold group relative overflow-hidden shadow-2xl w-full sm:w-auto"
+                  className={`text-base sm:text-xl px-8 sm:px-10 py-4 sm:py-6 font-semibold group relative overflow-hidden shadow-2xl w-full sm:w-auto ${
+                    darkMode 
+                      ? 'bg-white text-black hover:bg-gray-200' 
+                      : 'bg-white text-black hover:bg-gray-100'
+                  }`}
                 >
                   <motion.span
                     className="relative z-10 flex items-center justify-center"
@@ -339,7 +324,7 @@ const CTASection: React.FC<CTASectionProps> = ({ darkMode = false }) => {
               {[...Array(5)].map((_, i) => (
                 <motion.div 
                   key={i}
-                  className="w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"
+                  className="w-6 h-6 bg-white rounded-full"
                   animate={{
                     scale: [1, 1.2, 1],
                     opacity: [0.7, 1, 0.7]

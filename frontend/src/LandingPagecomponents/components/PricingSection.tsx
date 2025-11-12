@@ -81,8 +81,8 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
       ref={sectionRef}
       className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 relative overflow-hidden ${
         darkMode 
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
-          : 'bg-gradient-to-br from-gray-50 via-white to-blue-50'
+          ? 'bg-black' 
+          : 'bg-[#F9F9F9]'
       }`}
     >
       {/* 3D Background Elements */}
@@ -91,7 +91,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
           <motion.div
             key={i}
             className={`absolute rounded-full ${
-              darkMode ? 'bg-blue-500/10' : 'bg-blue-400/20'
+              darkMode ? 'bg-accent-blue/5' : 'bg-accent-blue/10'
             } blur-3xl`}
             style={{
               width: `${180 + i * 40}px`,
@@ -124,19 +124,8 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
           <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-4 ${
             darkMode ? 'text-white' : 'text-gray-800'
           }`}>
-            Choose Your <motion.span 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                backgroundSize: "200% 200%"
-              }}
+            Choose Your             <motion.span 
+              className={darkMode ? 'text-accent-blue' : 'text-[#1A1A1A]'}
             >
               Perfect Plan
             </motion.span>
@@ -148,7 +137,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
             All plans include our core security and privacy features.
           </p>
           <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mx-auto mt-6"
+            className={`w-24 h-1 rounded-full mx-auto mt-6 ${
+              darkMode ? 'bg-accent-blue' : 'bg-[#1A1A1A]'
+            }`}
             initial={{ width: 0 }}
             animate={isInView ? { width: 96 } : { width: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -174,12 +165,12 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
               <Card 
                 className={`relative border-0 shadow-xl hover:shadow-2xl transition-all duration-300 h-full ${
                   plan.isPopular 
-                    ? `ring-2 ${darkMode ? 'ring-purple-500 shadow-2xl shadow-purple-500/30 scale-105' : 'ring-blue-500 shadow-xl'}` 
+                    ? `ring-2 ${darkMode ? 'ring-accent-blue shadow-2xl shadow-accent-blue/30 scale-105' : 'ring-accent-blue shadow-xl'}` 
                     : ''
                 } ${
                   darkMode 
-                    ? 'bg-gray-800/50 backdrop-blur-sm border-gray-700' 
-                    : 'bg-white border-gray-200'
+                    ? 'bg-black border-gray-700' 
+                    : 'bg-white border-[#E6E6E6]'
                 }`}
               >
                 {/* Popular Badge */}
@@ -198,8 +189,8 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
                   >
                     <div className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold shadow-lg ${
                       darkMode 
-                        ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white' 
-                        : 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                        ? 'bg-accent-blue text-white' 
+                        : 'bg-black text-white'
                     }`}>
                       Most Popular
                     </div>
@@ -211,10 +202,10 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
                   <motion.div 
                     className={`mx-auto w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center mb-4 shadow-xl relative overflow-hidden ${
                       plan.isPopular 
-                        ? 'bg-gradient-to-r from-purple-500 to-blue-500' 
+                        ? darkMode ? 'bg-accent-blue/40' : 'bg-accent-blue/50' 
                         : darkMode 
-                          ? 'bg-gradient-to-r from-purple-500/30 to-blue-500/30' 
-                          : 'bg-gradient-to-r from-purple-500/20 to-blue-500/20'
+                          ? 'bg-accent-blue/20' 
+                          : 'bg-accent-blue/30'
                     }`}
                     whileHover={{ scale: 1.1, rotate: 360 }}
                     transition={{ duration: 0.5 }}
@@ -223,7 +214,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
                     }}
                   >
                     <plan.icon className={`w-7 h-7 sm:w-8 sm:h-8 ${
-                      plan.isPopular ? 'text-white' : darkMode ? 'text-purple-300' : 'text-purple-600'
+                      plan.isPopular ? 'text-white' : darkMode ? 'text-white' : 'text-[#1A1A1A]'
                     } relative z-10`} />
                   </motion.div>
 
@@ -280,8 +271,8 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
                         <motion.div 
                           className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
                             darkMode 
-                              ? 'bg-gradient-to-r from-purple-500 to-blue-500' 
-                              : 'bg-gradient-to-r from-purple-500 to-blue-500'
+                              ? 'bg-accent-blue' 
+                              : 'bg-accent-blue'
                           }`}
                           whileHover={{ scale: 1.2, rotate: 180 }}
                           transition={{ duration: 0.3 }}
@@ -310,12 +301,10 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
                       <Button 
                         className={`w-full text-base sm:text-lg py-4 sm:py-6 font-semibold transition-all duration-300 flex items-center justify-center ${
                           plan.isPopular 
-                            ? `bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-xl ${
-                                darkMode ? 'shadow-2xl shadow-purple-500/30' : 'shadow-lg'
-                              }` 
+                            ? `${darkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-[#1A1A1A]'} hover:shadow-xl shadow-lg` 
                             : darkMode 
-                              ? 'border-2 border-purple-500 text-purple-300 hover:bg-purple-500 hover:text-white' 
-                              : 'border-2 border-purple-500 text-purple-600 hover:bg-purple-500 hover:text-white'
+                              ? 'border-2 border-accent-blue text-accent-blue hover:bg-accent-blue hover:text-white' 
+                              : 'border-2 border-[#1A1A1A] text-[#1A1A1A] hover:bg-[#1A1A1A] hover:text-white'
                         }`}
                         variant={plan.isPopular ? "default" : "outline"}
                       >
@@ -351,7 +340,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
               transition={{ duration: 0.2 }}
             >
               <span className={`font-semibold text-sm sm:text-base ${
-                darkMode ? 'text-cyan-300' : 'text-gray-700'
+                darkMode ? 'text-accent-blue' : 'text-[#1A1A1A]'
               }`}>
                 Stripe
               </span>
@@ -364,7 +353,7 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
               transition={{ duration: 0.2 }}
             >
               <span className={`font-semibold text-sm sm:text-base ${
-                darkMode ? 'text-cyan-300' : 'text-gray-700'
+                darkMode ? 'text-accent-blue' : 'text-[#1A1A1A]'
               }`}>
                 Razorpay
               </span>
@@ -381,11 +370,13 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
         >
           <div className={`rounded-2xl p-4 sm:p-6 max-w-md mx-auto shadow-xl border ${
             darkMode 
-              ? 'bg-gradient-to-br from-gray-800/80 to-purple-900/30 backdrop-blur-sm border-gray-700' 
-              : 'bg-gradient-to-br from-purple-50 to-blue-50 border-gray-200'
+              ? 'bg-black border-gray-700' 
+              : 'bg-white border-[#E6E6E6]'
           }`}>
             <motion.div 
-              className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg"
+              className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg ${
+                darkMode ? 'bg-accent-blue' : 'bg-accent-blue'
+              }`}
               animate={{
                 scale: [1, 1.1, 1],
                 rotate: [0, 5, -5, 0]
@@ -396,7 +387,9 @@ const PricingSection: React.FC<PricingSectionProps> = ({ darkMode = false }) => 
                 ease: "easeInOut"
               }}
               style={{
-                boxShadow: '0 4px 15px rgba(147, 51, 234, 0.4)'
+                boxShadow: darkMode 
+                  ? '0 4px 15px rgba(167, 199, 231, 0.3)' 
+                  : '0 4px 15px rgba(167, 199, 231, 0.4)'
               }}
             >
               <Check className="w-5 h-5 sm:w-6 sm:h-6 text-white" />

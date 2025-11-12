@@ -72,8 +72,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
       ref={sectionRef}
       className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 relative overflow-hidden ${
         darkMode 
-          ? 'bg-gradient-to-br from-gray-900 via-indigo-900/20 to-gray-900' 
-          : 'bg-gradient-to-br from-indigo-50 via-white to-purple-50'
+          ? 'bg-black' 
+          : 'bg-[#F9F9F9]'
       }`}
     >
       {/* 3D Background Elements */}
@@ -82,7 +82,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
           <motion.div
             key={i}
             className={`absolute rounded-full ${
-              darkMode ? 'bg-indigo-500/10' : 'bg-indigo-400/20'
+              darkMode ? 'bg-accent-blue/5' : 'bg-accent-blue/10'
             } blur-3xl`}
             style={{
               width: `${150 + i * 60}px`,
@@ -115,19 +115,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
           <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 px-4 ${
             darkMode ? 'text-white' : 'text-gray-800'
           }`}>
-            What Our <motion.span 
-              className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                backgroundSize: "200% 200%"
-              }}
+            What Our             <motion.span 
+              className={darkMode ? 'text-accent-blue' : 'text-[#1A1A1A]'}
             >
               Community
             </motion.span> Says
@@ -139,7 +128,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
             that Therabee makes in their therapy journey.
           </p>
           <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mx-auto mt-6"
+            className={`w-24 h-1 rounded-full mx-auto mt-6 ${
+              darkMode ? 'bg-accent-blue' : 'bg-[#1A1A1A]'
+            }`}
             initial={{ width: 0 }}
             animate={isInView ? { width: 96 } : { width: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -163,8 +154,8 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
                 >
                   <Card className={`border-0 shadow-xl hover:shadow-2xl max-w-3xl mx-auto transition-all duration-300 ${
                     darkMode 
-                      ? 'bg-gray-800/50 backdrop-blur-sm border-gray-700' 
-                      : 'bg-white border-gray-200'
+                      ? 'bg-black border-gray-700' 
+                      : 'bg-white border-[#E6E6E6]'
                   }`}>
                     <CardContent className="p-6 sm:p-8 text-center">
                       {/* Quote Icon */}
@@ -181,7 +172,7 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
                         }}
                       >
                         <Quote className={`w-10 h-10 sm:w-12 sm:h-12 mx-auto ${
-                          darkMode ? 'text-indigo-400/30' : 'text-indigo-400/40'
+                          darkMode ? 'text-accent-blue/20' : 'text-accent-blue/30'
                         }`} />
                       </motion.div>
 
@@ -202,13 +193,15 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
                         <motion.div 
                           className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center font-semibold shadow-lg ${
                             darkMode 
-                              ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white' 
-                              : 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white'
+                              ? 'bg-accent-blue text-white' 
+                              : 'bg-accent-blue text-white'
                           }`}
                           whileHover={{ scale: 1.1, rotate: 360 }}
                           transition={{ duration: 0.5 }}
                           style={{
-                            boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)'
+                            boxShadow: darkMode 
+                              ? '0 4px 15px rgba(167, 199, 231, 0.3)' 
+                              : '0 4px 15px rgba(167, 199, 231, 0.4)'
                           }}
                         >
                           {testimonial.avatar}
@@ -241,11 +234,11 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   index === currentIndex 
                     ? darkMode 
-                      ? 'bg-gradient-to-r from-indigo-500 to-purple-500 shadow-lg' 
-                      : 'bg-gradient-to-r from-indigo-500 to-purple-500 shadow-lg'
+                      ? 'bg-accent-blue shadow-lg' 
+                      : 'bg-accent-blue shadow-lg'
                     : darkMode 
-                      ? 'bg-indigo-500/30 hover:bg-indigo-500/50' 
-                      : 'bg-indigo-400/30 hover:bg-indigo-400/50'
+                      ? 'bg-accent-blue/30 hover:bg-accent-blue/50' 
+                      : 'bg-accent-blue/30 hover:bg-accent-blue/50'
                 }`}
                 onClick={() => setCurrentIndex(index)}
                 whileHover={{ scale: 1.3 }}
@@ -295,7 +288,9 @@ const TestimonialsSection: React.FC<TestimonialsSectionProps> = ({ darkMode = fa
                 }}
                 style={{
                   backgroundSize: "200% 200%",
-                  backgroundImage: "linear-gradient(to right, #6366f1, #a855f7, #6366f1)"
+                  backgroundImage: darkMode 
+                    ? "linear-gradient(to right, #A7C7E7, #A7C7E7, #A7C7E7)" 
+                    : "linear-gradient(to right, #1A1A1A, #1A1A1A, #1A1A1A)"
                 }}
               >
                 {stat.value}

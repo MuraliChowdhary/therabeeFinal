@@ -29,8 +29,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
       ref={containerRef}
       className={`relative min-h-screen flex items-center justify-center overflow-hidden transition-colors duration-300 ${
         darkMode 
-          ? 'bg-gradient-to-br from-gray-900 via-indigo-900 to-purple-900' 
-          : 'bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900'
+          ? 'bg-black' 
+          : 'bg-[#F9F9F9]'
       }`}
       style={{ y, opacity, scale, rotateX }}
     >
@@ -38,10 +38,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
       <div className="absolute inset-0 pointer-events-none">
         {/* Large 3D Bubbles */}
         <motion.div 
-          className="absolute top-20 left-10 w-40 h-40 bg-gradient-to-br from-cyan-400/30 to-blue-500/30 rounded-full shadow-2xl"
+          className="absolute top-20 left-10 w-40 h-40 rounded-full shadow-2xl"
           style={{ 
-            background: 'radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.4), rgba(59, 130, 246, 0.2))',
-            boxShadow: '0 0 60px rgba(34, 211, 238, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1)'
+            background: darkMode ? 'radial-gradient(circle at 30% 30%, rgba(167, 199, 231, 0.15), rgba(167, 199, 231, 0.05))' : 'radial-gradient(circle at 30% 30%, rgba(167, 199, 231, 0.2), rgba(167, 199, 231, 0.1))',
+            boxShadow: darkMode ? '0 0 60px rgba(167, 199, 231, 0.1), inset 0 0 20px rgba(255, 255, 255, 0.05)' : '0 0 60px rgba(167, 199, 231, 0.15), inset 0 0 20px rgba(255, 255, 255, 0.05)'
           }}
           animate={{
             y: [0, -30, 0],
@@ -57,10 +57,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
           }}
         />
         <motion.div 
-          className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-br from-pink-400/25 to-purple-500/25 rounded-full shadow-2xl"
+          className="absolute top-40 right-20 w-32 h-32 rounded-full shadow-2xl"
           style={{ 
-            background: 'radial-gradient(circle at 30% 30%, rgba(236, 72, 153, 0.4), rgba(147, 51, 234, 0.2))',
-            boxShadow: '0 0 50px rgba(236, 72, 153, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.1)'
+            background: darkMode ? 'radial-gradient(circle at 30% 30%, rgba(200, 230, 201, 0.15), rgba(200, 230, 201, 0.05))' : 'radial-gradient(circle at 30% 30%, rgba(200, 230, 201, 0.2), rgba(200, 230, 201, 0.1))',
+            boxShadow: darkMode ? '0 0 50px rgba(200, 230, 201, 0.1), inset 0 0 15px rgba(255, 255, 255, 0.05)' : '0 0 50px rgba(200, 230, 201, 0.15), inset 0 0 15px rgba(255, 255, 255, 0.05)'
           }}
           animate={{
             y: [0, 25, 0],
@@ -77,10 +77,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
           }}
         />
         <motion.div 
-          className="absolute bottom-32 left-1/4 w-24 h-24 bg-gradient-to-br from-emerald-400/30 to-teal-500/30 rounded-full shadow-2xl"
+          className="absolute bottom-32 left-1/4 w-24 h-24 rounded-full shadow-2xl"
           style={{ 
-            background: 'radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 0.4), rgba(20, 184, 166, 0.2))',
-            boxShadow: '0 0 40px rgba(16, 185, 129, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.1)'
+            background: darkMode ? 'radial-gradient(circle at 30% 30%, rgba(167, 199, 231, 0.12), rgba(167, 199, 231, 0.05))' : 'radial-gradient(circle at 30% 30%, rgba(167, 199, 231, 0.18), rgba(167, 199, 231, 0.08))',
+            boxShadow: darkMode ? '0 0 40px rgba(167, 199, 231, 0.08), inset 0 0 12px rgba(255, 255, 255, 0.05)' : '0 0 40px rgba(167, 199, 231, 0.12), inset 0 0 12px rgba(255, 255, 255, 0.05)'
           }}
           animate={{
             y: [0, -35, 0],
@@ -99,10 +99,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
         
         {/* Medium 3D Bubbles */}
         <motion.div 
-          className="absolute top-1/3 right-1/3 w-16 h-16 bg-gradient-to-br from-yellow-400/35 to-orange-500/35 rounded-full shadow-xl"
+          className="absolute top-1/3 right-1/3 w-16 h-16 rounded-full shadow-xl"
           style={{ 
-            background: 'radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.5), rgba(249, 115, 22, 0.3))',
-            boxShadow: '0 0 30px rgba(251, 191, 36, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2)'
+            background: darkMode ? 'radial-gradient(circle at 30% 30%, rgba(179, 179, 179, 0.2), rgba(179, 179, 179, 0.1))' : 'radial-gradient(circle at 30% 30%, rgba(179, 179, 179, 0.25), rgba(179, 179, 179, 0.15))',
+            boxShadow: darkMode ? '0 0 30px rgba(179, 179, 179, 0.15), inset 0 0 10px rgba(255, 255, 255, 0.1)' : '0 0 30px rgba(179, 179, 179, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1)'
           }}
           animate={{
             y: [0, -40, 0],
@@ -118,10 +118,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
           }}
         />
         <motion.div 
-          className="absolute bottom-1/4 right-1/4 w-20 h-20 bg-gradient-to-br from-violet-400/30 to-purple-500/30 rounded-full shadow-xl"
+          className="absolute bottom-1/4 right-1/4 w-20 h-20 rounded-full shadow-xl"
           style={{ 
-            background: 'radial-gradient(circle at 30% 30%, rgba(139, 92, 246, 0.4), rgba(124, 58, 237, 0.2))',
-            boxShadow: '0 0 35px rgba(139, 92, 246, 0.3), inset 0 0 12px rgba(255, 255, 255, 0.1)'
+            background: darkMode ? 'radial-gradient(circle at 30% 30%, rgba(200, 230, 201, 0.12), rgba(200, 230, 201, 0.05))' : 'radial-gradient(circle at 30% 30%, rgba(200, 230, 201, 0.18), rgba(200, 230, 201, 0.08))',
+            boxShadow: darkMode ? '0 0 35px rgba(200, 230, 201, 0.08), inset 0 0 12px rgba(255, 255, 255, 0.05)' : '0 0 35px rgba(200, 230, 201, 0.12), inset 0 0 12px rgba(255, 255, 255, 0.05)'
           }}
           animate={{
             y: [0, 30, 0],
@@ -183,30 +183,23 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white drop-shadow-2xl"
+              className={`text-4xl md:text-5xl lg:text-6xl font-bold leading-tight drop-shadow-2xl ${
+                darkMode ? 'text-white' : 'text-[#1A1A1A]'
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               Connecting Children with{" "}
               <motion.span 
-                className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg"
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear"
-                }}
-                style={{
-                  backgroundSize: "200% 200%"
-                }}
+                className={`${darkMode ? 'text-accent-blue' : 'text-[#1A1A1A]'} drop-shadow-lg`}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}
               >
                 Trusted Therapists
               </motion.span>,{" "}
               <motion.span 
-                className="text-cyan-300 drop-shadow-lg"
+                className={`${darkMode ? 'text-white' : 'text-[#4D4D4D]'} drop-shadow-lg`}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
@@ -214,7 +207,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               </motion.span>
             </motion.h1>
             <motion.p 
-              className="text-xl text-gray-200 max-w-2xl mx-auto lg:mx-0 drop-shadow-lg leading-relaxed"
+              className={`text-xl max-w-2xl mx-auto lg:mx-0 drop-shadow-lg leading-relaxed ${
+                darkMode ? 'text-gray-300' : 'text-[#4D4D4D]'
+              }`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
@@ -239,9 +234,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               <Link to="/login">
                 <Button 
                   size="lg" 
-                  className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold relative overflow-hidden group shadow-2xl border-0"
+                  className={`text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 font-bold relative overflow-hidden group shadow-2xl border-0 ${
+                    darkMode 
+                      ? 'bg-white text-black hover:bg-gray-200' 
+                      : 'bg-black text-white hover:bg-[#1A1A1A]'
+                  }`}
                   style={{
-                    boxShadow: '0 10px 30px rgba(34, 211, 238, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                    boxShadow: darkMode 
+                      ? '0 10px 30px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)' 
+                      : '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                   }}
                 >
                   <motion.span
@@ -269,9 +270,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               <Button 
                 size="lg" 
                 onClick={onBookDemoClick}
-                className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold relative overflow-hidden group shadow-2xl border-0"
+                className={`text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 font-bold relative overflow-hidden group shadow-2xl border-0 ${
+                  darkMode 
+                    ? 'bg-white text-black hover:bg-gray-200' 
+                    : 'bg-black text-white hover:bg-[#1A1A1A]'
+                }`}
                 style={{
-                  boxShadow: '0 10px 30px rgba(34, 211, 238, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
+                  boxShadow: darkMode 
+                    ? '0 10px 30px rgba(255, 255, 255, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)' 
+                    : '0 10px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
                 }}
               >
                 <motion.span
@@ -299,12 +306,30 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1.0 }}
           >
-            <p className="text-sm text-gray-300 mb-4 drop-shadow-lg">Trusted by leading healthcare providers</p>
+            <p className={`text-sm mb-4 drop-shadow-lg ${
+              darkMode ? 'text-gray-300' : 'text-[#4D4D4D]'
+            }`}>Trusted by leading healthcare providers</p>
             <div className="flex flex-wrap justify-center lg:justify-start items-center gap-6">
-              <div className="text-sm font-semibold text-gray-200 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">Mayo Clinic</div>
-              <div className="text-sm font-semibold text-gray-200 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">Johns Hopkins</div>
-              <div className="text-sm font-semibold text-gray-200 bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm">Cleveland Clinic</div>
-              <div className="text-sm font-semibold text-cyan-300 bg-cyan-500/20 px-3 py-1 rounded-full backdrop-blur-sm">+500 more</div>
+              <div className={`text-sm font-semibold px-3 py-1 rounded-full backdrop-blur-sm ${
+                darkMode 
+                  ? 'text-gray-300 bg-white/10' 
+                  : 'text-[#4D4D4D] bg-white border border-[#E6E6E6]'
+              }`}>Mayo Clinic</div>
+              <div className={`text-sm font-semibold px-3 py-1 rounded-full backdrop-blur-sm ${
+                darkMode 
+                  ? 'text-gray-300 bg-white/10' 
+                  : 'text-[#4D4D4D] bg-white border border-[#E6E6E6]'
+              }`}>Johns Hopkins</div>
+              <div className={`text-sm font-semibold px-3 py-1 rounded-full backdrop-blur-sm ${
+                darkMode 
+                  ? 'text-gray-300 bg-white/10' 
+                  : 'text-[#4D4D4D] bg-white border border-[#E6E6E6]'
+              }`}>Cleveland Clinic</div>
+              <div className={`text-sm font-semibold px-3 py-1 rounded-full backdrop-blur-sm ${
+                darkMode 
+                  ? 'text-accent-blue bg-accent-blue/20' 
+                  : 'text-[#1A1A1A] bg-accent-blue/20'
+              }`}>+500 more</div>
             </div>
           </motion.div>
         </motion.div>
@@ -335,9 +360,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               />
               {/* 3D Glow Effect */}
               <motion.div
-                className="absolute inset-0 bg-gradient-to-tr from-cyan-400/20 via-transparent to-purple-500/20 rounded-2xl"
+                className={`absolute inset-0 rounded-2xl ${
+                  darkMode 
+                    ? 'bg-gradient-to-tr from-accent-blue/10 via-transparent to-accent-green/10' 
+                    : 'bg-gradient-to-tr from-accent-blue/5 via-transparent to-accent-green/5'
+                }`}
                 animate={{
-                  opacity: [0.3, 0.6, 0.3]
+                  opacity: [0.2, 0.4, 0.2]
                 }}
                 transition={{
                   duration: 3,
@@ -349,9 +378,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
             
             {/* Floating 3D Elements */}
             <motion.div 
-              className="absolute -bottom-6 -right-6 w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full shadow-2xl"
+              className={`absolute -bottom-6 -right-6 w-20 h-20 rounded-full shadow-2xl ${
+                darkMode ? 'bg-accent-blue/30' : 'bg-accent-blue/40'
+              }`}
               style={{
-                boxShadow: '0 0 40px rgba(34, 211, 238, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2)'
+                boxShadow: darkMode 
+                  ? '0 0 40px rgba(167, 199, 231, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.1)' 
+                  : '0 0 40px rgba(167, 199, 231, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1)'
               }}
               animate={{
                 scale: [1, 1.2, 1],
@@ -365,9 +398,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               }}
             />
             <motion.div 
-              className="absolute -top-6 -left-6 w-16 h-16 bg-gradient-to-br from-pink-400 to-purple-500 rounded-full shadow-2xl"
+              className={`absolute -top-6 -left-6 w-16 h-16 rounded-full shadow-2xl ${
+                darkMode ? 'bg-accent-green/30' : 'bg-accent-green/40'
+              }`}
               style={{
-                boxShadow: '0 0 35px rgba(236, 72, 153, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.2)'
+                boxShadow: darkMode 
+                  ? '0 0 35px rgba(200, 230, 201, 0.3), inset 0 0 15px rgba(255, 255, 255, 0.1)' 
+                  : '0 0 35px rgba(200, 230, 201, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.1)'
               }}
               animate={{
                 y: [0, -15, 0],
@@ -382,9 +419,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ darkMode = false, onBookDemoC
               }}
             />
             <motion.div 
-              className="absolute top-1/2 -right-8 w-12 h-12 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full shadow-xl"
+              className={`absolute top-1/2 -right-8 w-12 h-12 rounded-full shadow-xl ${
+                darkMode ? 'bg-gray-icon/30' : 'bg-gray-icon/40'
+              }`}
               style={{
-                boxShadow: '0 0 25px rgba(251, 191, 36, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2)'
+                boxShadow: darkMode 
+                  ? '0 0 25px rgba(179, 179, 179, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1)' 
+                  : '0 0 25px rgba(179, 179, 179, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1)'
               }}
               animate={{
                 x: [0, 10, 0],

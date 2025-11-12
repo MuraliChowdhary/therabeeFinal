@@ -53,8 +53,8 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
       ref={sectionRef}
       className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 ${
         darkMode 
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
-          : 'bg-gradient-to-br from-gray-50 via-white to-blue-50'
+          ? 'bg-black' 
+          : 'bg-[#F9F9F9]'
       }`}
     >
 
@@ -64,7 +64,7 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
           <motion.div
             key={i}
             className={`absolute rounded-full ${
-              darkMode ? 'bg-gradient-to-br from-cyan-500/10 to-purple-500/10' : 'bg-gradient-to-br from-cyan-400/20 to-purple-400/20'
+              darkMode ? 'bg-accent-blue/5' : 'bg-accent-blue/10'
             } blur-3xl`}
             style={{
               width: `${200 + i * 50}px`,
@@ -101,18 +101,7 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
           }`}>
             Everything You Need for{" "}
             <motion.span 
-              className="bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-              style={{
-                backgroundSize: "200% 200%"
-              }}
+              className={darkMode ? 'text-accent-blue' : 'text-[#1A1A1A]'}
             >
               Successful Therapy
             </motion.span>
@@ -124,7 +113,9 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
             for effective, secure, and convenient therapy sessions.
           </p>
           <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full mx-auto mt-6"
+            className={`w-24 h-1 rounded-full mx-auto mt-6 ${
+              darkMode ? 'bg-accent-blue' : 'bg-[#1A1A1A]'
+            }`}
             initial={{ width: 0 }}
             animate={isInView ? { width: 96 } : { width: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -149,15 +140,15 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
             >
               <Card className={`group hover:shadow-2xl transition-all duration-300 h-full border ${
                 darkMode 
-                  ? 'border-gray-700 bg-gray-800/50 backdrop-blur-sm' 
-                  : 'border-gray-200 bg-white'
+                  ? 'border-gray-700 bg-black' 
+                  : 'border-[#E6E6E6] bg-white'
               } relative overflow-hidden`}>
                 {/* 3D Glow Effect */}
                 <motion.div
-                  className={`absolute inset-0 bg-gradient-to-br ${
+                  className={`absolute inset-0 ${
                     darkMode 
-                      ? 'from-cyan-500/20 to-purple-500/20' 
-                      : 'from-cyan-400/10 to-purple-400/10'
+                      ? 'bg-accent-blue/10' 
+                      : 'bg-accent-blue/5'
                   } opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
                   animate={{
                     opacity: [0, 0.3, 0],
@@ -171,34 +162,25 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
                 
                 <CardHeader className="text-center pb-4 relative z-10">
                   <motion.div 
-                    className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-xl relative overflow-hidden"
+                    className={`w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-4 rounded-2xl flex items-center justify-center shadow-xl relative overflow-hidden ${
+                      darkMode ? 'bg-accent-blue/30' : 'bg-accent-blue/40'
+                    }`}
                     whileHover={{ scale: 1.1, rotate: 360 }}
                     transition={{ duration: 0.5 }}
                     style={{
-                      boxShadow: '0 10px 30px rgba(59, 130, 246, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.1)'
+                      boxShadow: darkMode 
+                        ? '0 10px 30px rgba(167, 199, 231, 0.2), inset 0 0 20px rgba(255, 255, 255, 0.05)' 
+                        : '0 10px 30px rgba(167, 199, 231, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.05)'
                     }}
                   >
-                    <feature.icon className="w-7 h-7 sm:w-8 sm:h-8 text-white relative z-10" />
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600"
-                      animate={{
-                        backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                      }}
-                      transition={{
-                        duration: 3,
-                        repeat: Infinity,
-                        ease: "linear"
-                      }}
-                      style={{
-                        backgroundSize: "200% 200%",
-                        opacity: 0.3
-                      }}
-                    />
+                    <feature.icon className={`w-7 h-7 sm:w-8 sm:h-8 relative z-10 ${
+                      darkMode ? 'text-white' : 'text-[#1A1A1A]'
+                    }`} />
                   </motion.div>
                   <CardTitle className={`text-lg sm:text-xl font-semibold transition-colors duration-300 ${
                     darkMode 
-                      ? 'text-white group-hover:text-cyan-400' 
-                      : 'text-gray-800 group-hover:text-blue-600'
+                      ? 'text-white group-hover:text-accent-blue' 
+                      : 'text-[#1A1A1A] group-hover:text-[#4D4D4D]'
                   }`}>
                     {feature.title}
                   </CardTitle>
@@ -234,8 +216,10 @@ const FeaturesSection: React.FC<FeaturesSectionProps> = ({ darkMode = false }) =
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Link to="/login">
-                <button className={`px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold rounded-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto flex items-center justify-center ${
-                  darkMode ? 'shadow-2xl shadow-cyan-500/30' : 'shadow-lg'
+                <button className={`px-6 sm:px-8 py-3 sm:py-4 font-bold rounded-lg hover:shadow-xl transition-all duration-300 w-full sm:w-auto flex items-center justify-center ${
+                  darkMode 
+                    ? 'bg-white text-black hover:bg-gray-200 shadow-2xl' 
+                    : 'bg-black text-white hover:bg-[#1A1A1A] shadow-lg'
                 }`}>
                   Sign In
                   <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />

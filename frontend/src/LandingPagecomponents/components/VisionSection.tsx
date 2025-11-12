@@ -17,15 +17,15 @@ const VisionSection: React.FC<VisionSectionProps> = ({ darkMode = false }) => {
       ref={sectionRef}
       className={`py-12 sm:py-16 lg:py-20 transition-colors duration-300 relative overflow-hidden ${
         darkMode 
-          ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900' 
-          : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'
+          ? 'bg-black' 
+          : 'bg-[#F9F9F9]'
       }`}
     >
       {/* 3D Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
           className={`absolute top-20 right-20 w-64 h-64 rounded-full blur-3xl ${
-            darkMode ? 'bg-purple-500/20' : 'bg-purple-400/30'
+            darkMode ? 'bg-accent-blue/10' : 'bg-accent-blue/15'
           }`}
           animate={{
             scale: [1, 1.3, 1],
@@ -63,7 +63,7 @@ const VisionSection: React.FC<VisionSectionProps> = ({ darkMode = false }) => {
               {/* 3D Floating Elements */}
               <motion.div
                 className={`absolute -top-4 -left-4 w-12 h-12 rounded-full ${
-                  darkMode ? 'bg-cyan-500/30' : 'bg-blue-500/30'
+                  darkMode ? 'bg-accent-blue/30' : 'bg-accent-blue/40'
                 } backdrop-blur-sm`}
                 animate={{
                   scale: [1, 1.3, 1],
@@ -81,7 +81,7 @@ const VisionSection: React.FC<VisionSectionProps> = ({ darkMode = false }) => {
               />
               <motion.div
                 className={`absolute -bottom-2 -right-2 w-8 h-8 rounded-full ${
-                  darkMode ? 'bg-purple-500/30' : 'bg-purple-500/40'
+                  darkMode ? 'bg-accent-green/30' : 'bg-accent-green/40'
                 } backdrop-blur-sm`}
                 animate={{
                   scale: [1, 1.5, 1],
@@ -112,25 +112,16 @@ const VisionSection: React.FC<VisionSectionProps> = ({ darkMode = false }) => {
               <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold ${
                 darkMode ? 'text-white' : 'text-gray-800'
               }`}>
-                Our <motion.span 
-                  className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
-                  animate={{
-                    backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                  style={{
-                    backgroundSize: "200% 200%"
-                  }}
+                Our                 <motion.span 
+                  className={darkMode ? 'text-accent-blue' : 'text-[#1A1A1A]'}
                 >
                   Mission
                 </motion.span>
               </h2>
               <motion.div 
-                className="w-16 h-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full"
+                className={`w-16 h-1 rounded-full ${
+                  darkMode ? 'bg-accent-blue' : 'bg-[#1A1A1A]'
+                }`}
                 initial={{ width: 0 }}
                 animate={isInView ? { width: 64 } : { width: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -167,7 +158,9 @@ const VisionSection: React.FC<VisionSectionProps> = ({ darkMode = false }) => {
                   whileHover={{ scale: 1.05, x: 5 }}
                 >
                   <motion.div 
-                    className="w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                    className={`w-3 h-3 rounded-full ${
+                      darkMode ? 'bg-accent-blue' : 'bg-accent-blue'
+                    }`}
                     animate={{
                       scale: [1, 1.3, 1],
                       opacity: [0.7, 1, 0.7]

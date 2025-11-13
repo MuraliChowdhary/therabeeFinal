@@ -154,8 +154,7 @@ const allowedOrigins = [
   'http://127.0.0.1:3000',
   'http://localhost:5173',
   'https://theraabee.in',
-  'https://www.theraabee.in',
-  'https://app.theraabee.in',
+  'https://app.therabee.in'
 ];
 
 const corsOptions: CorsOptions = {

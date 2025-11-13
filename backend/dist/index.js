@@ -147,9 +147,9 @@ const allowedOrigins = [
     'https://theraabee.vercel.app',
     'http://localhost:3000',
     'http://127.0.0.1:3000',
-    'http://localhost:5173', // Vite dev server
+    'http://localhost:5173',
     'https://theraabee.in',
-    'https://www.theraabee.in',
+    'https://app.therabee.in'
 ];
 const corsOptions = {
     origin: (origin, callback) => {
